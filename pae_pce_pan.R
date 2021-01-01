@@ -97,7 +97,7 @@ pae_pce <- function(matric, k = 25, minit = 5, maxit = 10000, oneGrid = FALSE, s
 	    # ra.tre <- njs(dist.hamming(tempMatrix))
 	    
 	    if(dim(as.data.frame(tempMatrix))[1] == 0){
-	      print('This iteration has to be stopped because there is no more autapomorphies!')
+	      print('This iteration had to be stopped because there is no more autapomorphies!')
 	      break
 	    }
 	    
@@ -178,12 +178,12 @@ pae_pce <- function(matric, k = 25, minit = 5, maxit = 10000, oneGrid = FALSE, s
 	    
 	    nomesCOL <- colnames(matTemp) # species which are synapomorphies
 	    if(is.null(nomesCOL) && contagem != 1){
-	      print('This analysis had to be stopped because there is no more synapomorphies!')
+	      print('This analysis had to be stopped because there is no more autapomorphies!')
 	      
 	      break
 	      
 	    } else if(is.null(nomesCOL) && contagem == 1){
-	      stop('This iteration had to be stopped because there is no more synapomorphies!')
+	      stop('This iteration had to be stopped because there is no more autapomorphies!')
 	    }
 	    
 	    for(j in nomesCOL){
@@ -207,7 +207,7 @@ pae_pce <- function(matric, k = 25, minit = 5, maxit = 10000, oneGrid = FALSE, s
 	    syn_grids <- unlist(lista_T)[unlist(lista_T) %in% n_occur$Var1[n_occur$Freq > 1]]
 	    # syn_grids
 	    if(length(syn_grids) < 2){
-	      print('This iteration had to be stopped because there is no more synapomorphies!')
+	      print('This iteration had to be stopped because there is no more autapomorphies!')
 	      break
 	    }
 	    
@@ -223,7 +223,7 @@ pae_pce <- function(matric, k = 25, minit = 5, maxit = 10000, oneGrid = FALSE, s
 	                             1, dimnames = list(frameTemp[,1], colnames(frameTemp)[2]))
 	    
 	    if(length(unique(rownames(resulPaeRaster))) == 0){
-	      stop('This iteration had to be stopped because there is no more synapomorphies!')
+	      stop('This iteration had to be stopped because there is no more autapomorphies!')
 	    }
 	    
 	    posic <- 0
@@ -378,7 +378,7 @@ pae_pce <- function(matric, k = 25, minit = 5, maxit = 10000, oneGrid = FALSE, s
 	    }
 	    
 	    if(is.null(treeIt1)){
-	      stop('This iteration had to be stopped because there is no more autapomorphies!')
+	      stop('This iteration had to be stopped because there is no more synapomorphies!')
 	    }
 	    
 	    
