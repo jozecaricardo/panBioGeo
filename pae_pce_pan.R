@@ -183,8 +183,7 @@ pae_pce <- function(matric, k = 25, minit = 5, maxit = 10000, oneGrid = FALSE, s
 	      break
 	      
 	    } else if(is.null(nomesCOL) && contagem == 1){
-	      print('This iteration had to be stopped because there is no more synapomorphies!')
-	      next
+	      stop('This iteration had to be stopped because there is no more synapomorphies!')
 	    }
 	    
 	    for(j in nomesCOL){
@@ -209,7 +208,7 @@ pae_pce <- function(matric, k = 25, minit = 5, maxit = 10000, oneGrid = FALSE, s
 	    # syn_grids
 	    if(length(syn_grids) < 2){
 	      print('This iteration had to be stopped because there is no more synapomorphies!')
-	      next
+	      break
 	    }
 	    
 	    speciesNames <- str_replace(names(syn_grids), "[0123456789]", "")
@@ -263,7 +262,7 @@ pae_pce <- function(matric, k = 25, minit = 5, maxit = 10000, oneGrid = FALSE, s
 	    if(sobrepo == TRUE){
 	      plot(r, axes = FALSE, legend = FALSE, add = TRUE, col = colores[(contagem + nVoltas)],
 	         alpha = 0.60)
-	    } else {
+	    } else if(sobrepo == FALSE){
 	      plot(r, axes = FALSE, legend = FALSE, add = TRUE, col = colores[contagem],
 	           alpha = 0.50)
 	    }
@@ -300,7 +299,7 @@ pae_pce <- function(matric, k = 25, minit = 5, maxit = 10000, oneGrid = FALSE, s
 	    # legend
 	    if(sobrepo == FALSE){
 	      iterat[contagem] <- contagem
-	    } else {
+	    } else if(sobrepo == TRUE){
 	      iterat[contagem] <- contagem + nVoltas
 	    }
 	    
@@ -319,13 +318,21 @@ pae_pce <- function(matric, k = 25, minit = 5, maxit = 10000, oneGrid = FALSE, s
 	  }
 	  
 	  if(sobrepo == TRUE){
-	    legend(x = 'bottomright', legend = iterat, pch = 15, col = colores[(nVoltas + 1):(length(iterat) + nVoltas)],
+	    if(is.null(iterat)){
+	      break
+	    } else if(!is.null(iterat)){
+	      legend(x = 'bottomright', legend = iterat, pch = 15, col = colores[(nVoltas + 1):(length(iterat) + nVoltas)],
 	           title = 'Adding generalized track of the iterations...',
 	           title.col = 'blue', pt.cex = 1.5, cex = 0.8)
-	  } else {
-	    legend(x = 'topright', legend = iterat, pch = 15, col = colores[1:length(iterat)],
+	    }
+	  } else if (sobrepo == FALSE){
+	    if(is.null(iterat)){
+	      break
+	    } else if(!is.null(iterat)){
+	      legend(x = 'topright', legend = iterat, pch = 15, col = colores[1:length(iterat)],
 	           title = 'Adding generalized track of the iterations...',
 	           title.col = 'red', pt.cex = 1.5, cex = 0.8)
+	    }
 	  }
 	  
 	  if(contagem == 1){
