@@ -77,7 +77,7 @@ pae_pce <- function(matric, k = 25, minit = 5, maxit = 10000, oneGrid = FALSE, s
 	  abline(h = 0, col = 'red', lty = 2) # equator
 	  
 	  iterat <- 0
-	} else {
+	} else if(sobrepo == TRUE){
 	  iterat <- 0
 	}
 	
@@ -178,7 +178,7 @@ pae_pce <- function(matric, k = 25, minit = 5, maxit = 10000, oneGrid = FALSE, s
 	    
 	    nomesCOL <- colnames(matTemp) # species which are synapomorphies
 	    if(is.null(nomesCOL) && contagem != 1){
-	      print('This analysis has to be stopped because there is no more synapomorphies!')
+	      print('This analysis had to be stopped because there is no more synapomorphies!')
 	      break
 	    } else if(is.null(nomesCOL) && contagem == 1){
 	      print('This iteration has to be stopped because there is no more synapomorphies!')
@@ -311,7 +311,7 @@ pae_pce <- function(matric, k = 25, minit = 5, maxit = 10000, oneGrid = FALSE, s
 	  } # closing 'while' looping
 	  
 	  if(is.null(nomesCOL) || dim(as.data.frame(tempMatrix))[1] == 0){
-	    iterat <- iterat[-length(iterat)]
+	    iterat <- iterat[contagem - 1]
 	  } else {
 	    iterat <- iterat
 	  }
