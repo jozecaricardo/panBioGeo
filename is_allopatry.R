@@ -115,13 +115,13 @@ is_allopatry <- function(results, phylogeny, coordin){
     lis <- arv$tip.label[arv$edge[which(arv$edge[,1] == ance), 2]]
     
     if(any(is.na(lis)) == FALSE){
-      comparison <- intersect(gridList[[lis[1]]], gridList[[lis[2]]])
+      comparison <- intersect(unlist(gridList[[lis[1]]]), unlist(gridList[[lis[2]]]))
       
       # vicariance or sympatry?
-      if(!is.null(comparison)){
+      if(length(comparison) == 0){
         cat(c(paste0(c(lis), collapse = ', '), 'SYMPATRY', '\n'), sep = '\t',
             file = logfile, append = TRUE)
-      } else {
+      } else if(length(comparison) != 0){
         cat(c(paste0(c(lis), collapse = ', '), 'ALLOPATRY', '\n'), sep = '\t',
             file = logfile, append = TRUE)
       }
@@ -137,10 +137,10 @@ is_allopatry <- function(results, phylogeny, coordin){
       comparison <- intersect(unlist(gridList[cladis_des1]), unlist(gridList[cladis_des2]))
       
       # vicariance or sympatry?
-      if(!is.null(comparison)){
+      if(length(comparison) == 0){
         cat(c(paste0(c(cladis_des1, cladis_des2), collapse = ', '), 'SYMPATRY', '\n'), sep = '\t',
             file = logfile, append = TRUE)
-      } else {
+      } else if(length(comparison) != 0){
         cat(c(paste0(c(cladis_des1, cladis_des2), collapse = ', '), 'ALLOPATRY', '\n'), sep = '\t',
             file = logfile, append = TRUE)
       }
